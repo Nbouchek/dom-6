@@ -31,6 +31,12 @@ const backdropClickHandler = () => {
 
 const cancelAddMovieHandler = () => {
   toggleMovieModel();
+  clearMovieInput();
+};
+const clearMovieInput = () => {
+  for (const userInput of userInputs) {
+    userInput.value = "";
+  }
 };
 
 const addMovieHandler = () => {
@@ -58,6 +64,7 @@ const addMovieHandler = () => {
   movies.push(newMovie);
   console.log(movies);
   toggleMovieModel();
+  clearMovieInput();
 };
 
 startAddMovieButton.addEventListener("click", toggleMovieModel);
