@@ -10,6 +10,8 @@ const startAddMovieButton = document.querySelector("header button");
 const backdrop = document.getElementById("backdrop");
 // const backdrop = document.body.firstElementChild;
 
+const cancelAddMovieButton = addMovieModal.querySelector(".btn--passive");
+
 const toggleBackdrop = () => {
   backdrop.classList.toggle("visible");
 };
@@ -19,9 +21,14 @@ const toggleMovieModel = () => {
   toggleBackdrop();
 };
 
-startAddMovieButton.addEventListener("click", toggleMovieModel);
-
 const backdropClickHandler = () => {
-    toggleMovieModel();
+  toggleMovieModel();
 };
+
+const cancelAddMovie = () => {
+  toggleMovieModel();
+};
+
+startAddMovieButton.addEventListener("click", toggleMovieModel);
 backdrop.addEventListener("click", backdropClickHandler);
+cancelAddMovieButton.addEventListener("click", cancelAddMovie);
