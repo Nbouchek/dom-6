@@ -13,6 +13,7 @@ const backdrop = document.getElementById("backdrop");
 const cancelAddMovieButton = addMovieModal.querySelector(".btn--passive");
 const confirmAddMovieButton = cancelAddMovieButton.nextElementSibling;
 const userInputs = addMovieModal.querySelectorAll("input");
+const deleteMovieModel = document.getElementById("delete-modal");
 
 const entryTextSection = document.getElementById("entry-text");
 const movies = [];
@@ -38,11 +39,15 @@ const deleteMovie = movieId => {
   listRoot.children[movieIndex].remove();
 };
 
+const closeMovieDeletionModal = () => {
+  toggleBackdrop();
+  deleteMovieModel.classList.remove("visible");
+};
+
 const deleteMovieHandler = movieId => {
-  const deleteMovieModel = document.getElementById("delete-modal");
   deleteMovieModel.classList.add("visible");
   toggleBackdrop();
-//   deleteMovie(movieId);
+  //   deleteMovie(movieId);
 };
 
 const renderNewMovieElement = (id, title, imageUrl, rating) => {
@@ -67,17 +72,22 @@ const toggleBackdrop = () => {
   backdrop.classList.toggle("visible");
 };
 
-const toggleMovieModel = () => {
-  addMovieModal.classList.toggle("visible");
+const closeMovieModal = () => {
+  addMovieModal.classList.remove("visible");
+};
+
+const showMovieModal = () => {
+  addMovieModal.classList.add("visible");
   toggleBackdrop();
 };
 
 const backdropClickHandler = () => {
-  toggleMovieModel();
+  closeMovieModal();
+  closeMovieDeletionModal();
 };
 
 const cancelAddMovieHandler = () => {
-  toggleMovieModel();
+  closeMovieModal();
   clearMovieInput();
 };
 const clearMovieInput = () => {
@@ -111,7 +121,8 @@ const addMovieHandler = () => {
 
   movies.push(newMovie);
   console.log(movies);
-  toggleMovieModel();
+  closeMovieModal();
+  toggleBackdrop();
   clearMovieInput();
   renderNewMovieElement(
     newMovie.id,
@@ -122,7 +133,7 @@ const addMovieHandler = () => {
   updateUI();
 };
 
-startAddMovieButton.addEventListener("click", toggleMovieModel);
+startAddMovieButton.addEventListener("click", showMovieModal);
 backdrop.addEventListener("click", backdropClickHandler);
 cancelAddMovieButton.addEventListener("click", cancelAddMovieHandler);
 confirmAddMovieButton.addEventListener("click", addMovieHandler);
