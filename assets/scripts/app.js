@@ -25,7 +25,7 @@ const updateUI = () => {
   }
 };
 
-const deleteMovieHandler = movieId => {
+const deleteMovie = movieId => {
   let movieIndex = 0;
   for (const movie of movies) {
     if (movie.id === movieId) {
@@ -36,8 +36,13 @@ const deleteMovieHandler = movieId => {
   movies.splice(movieIndex, 1);
   const listRoot = document.getElementById("movie-list");
   listRoot.children[movieIndex].remove();
-  // the following wold also work!
-  //   listRoot.removeChild(listRoot.children[movieIndex]);
+};
+
+const deleteMovieHandler = movieId => {
+  const deleteMovieModel = document.getElementById("delete-modal");
+  deleteMovieModel.classList.add("visible");
+  toggleBackdrop();
+//   deleteMovie(movieId);
 };
 
 const renderNewMovieElement = (id, title, imageUrl, rating) => {
